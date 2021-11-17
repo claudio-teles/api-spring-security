@@ -1,0 +1,59 @@
+/*C4*/SET SCHEMA PUBLIC
+\u000d\u000a    drop table if exists cars CASCADE 
+\u000d\u000a    drop table if exists factories CASCADE 
+\u000d\u000a    drop table if exists spreadsheet CASCADE 
+SET SCHEMA SYSTEM_LOBS
+DELETE FROM LOB_IDS WHERE LOB_ID=1
+INSERT INTO LOB_IDS VALUES(1,9213,0,30)
+COMMIT
+SET SCHEMA PUBLIC
+\u000d\u000a    drop sequence cars_sequence_generator if exists
+\u000d\u000a    drop sequence factory_sequence_generator if exists
+\u000d\u000a    drop sequence spreadsheet_sequence_generator if exists
+create sequence cars_sequence_generator start with 30 increment by 1
+create sequence factory_sequence_generator start with 30 increment by 1
+create sequence spreadsheet_sequence_generator start with 30 increment by 1
+\u000d\u000a    create table cars (\u000d\u000a       id bigint not null,\u000d\u000a        color varchar(20) not null,\u000d\u000a        cost float not null,\u000d\u000a        doors smallint not null,\u000d\u000a        fuel integer not null,\u000d\u000a        model varchar(20) not null,\u000d\u000a        year smallint not null,\u000d\u000a        factory_id_id bigint not null,\u000d\u000a        primary key (id)\u000d\u000a    )
+\u000d\u000a    create table factories (\u000d\u000a       id bigint not null,\u000d\u000a        country_code smallint not null,\u000d\u000a        name varchar(20) not null,\u000d\u000a        primary key (id)\u000d\u000a    )
+\u000d\u000a    create table spreadsheet (\u000d\u000a       id bigint not null,\u000d\u000a        data blob(255) not null,\u000d\u000a        name varchar(40) not null,\u000d\u000a        primary key (id)\u000d\u000a    )
+\u000d\u000a    alter table cars \u000d\u000a       add constraint FACTORIES_ID_FK \u000d\u000a       foreign key (factory_id_id) \u000d\u000a       references factories
+INSERT INTO FACTORIES VALUES(30,130,'FABRICA_UM')
+ALTER SEQUENCE PUBLIC.FACTORY_SEQUENCE_GENERATOR RESTART WITH 31
+COMMIT
+INSERT INTO FACTORIES VALUES(31,140,'FABRICA_DOIS')
+ALTER SEQUENCE PUBLIC.FACTORY_SEQUENCE_GENERATOR RESTART WITH 32
+COMMIT
+INSERT INTO FACTORIES VALUES(32,150,'FABRICA_TRES')
+ALTER SEQUENCE PUBLIC.FACTORY_SEQUENCE_GENERATOR RESTART WITH 33
+COMMIT
+INSERT INTO FACTORIES VALUES(33,150,'F\u00c1BRICA_UM')
+ALTER SEQUENCE PUBLIC.FACTORY_SEQUENCE_GENERATOR RESTART WITH 34
+COMMIT
+INSERT INTO CARS VALUES(30,'VERDE',45750.55859375E0,4,1,'MODELO_UM',2015,33)
+ALTER SEQUENCE PUBLIC.CARS_SEQUENCE_GENERATOR RESTART WITH 31
+COMMIT
+\u000d\u000a    drop table if exists cars CASCADE 
+\u000d\u000a    drop table if exists factories CASCADE 
+\u000d\u000a    drop table if exists spreadsheet CASCADE 
+\u000d\u000a    drop sequence cars_sequence_generator if exists
+\u000d\u000a    drop sequence factory_sequence_generator if exists
+\u000d\u000a    drop sequence spreadsheet_sequence_generator if exists
+DISCONNECT
+/*C5*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C6*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C7*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C8*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C9*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C10*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C11*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C12*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C13*/SET SCHEMA PUBLIC
+DISCONNECT
